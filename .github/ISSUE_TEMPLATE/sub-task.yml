@@ -1,0 +1,62 @@
+name: Sub-task
+description: Skapa en underuppgift kopplad till en pågående investering
+title: "[Sub-task] <beskrivning>"
+labels: ["sub-task"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # Underuppgift
+        För att spåra specifika åtgärder inom ett pågående projekt
+        (bygglov, UE-upphandling, besiktning, etc.)
+
+  - type: input
+    id: parent-issue
+    attributes:
+      label: "Relaterad huvud-issue (nummer)"
+      description: "t.ex. #42"
+      placeholder: "#42"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: "Kategori"
+      options:
+        - Bygglovsansökan
+        - UE-upphandling
+        - Materialbeställning
+        - Besiktning
+        - Kommunal kontakt
+        - Bank/finansiering
+        - Partneravtal
+        - Månadsrapport
+        - Annat
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Beskrivning"
+      placeholder: "Vad ska göras?"
+    validations:
+      required: true
+
+  - type: input
+    id: due-date
+    attributes:
+      label: "Deadline"
+      placeholder: "YYYY-MM-DD"
+
+  - type: dropdown
+    id: assignee
+    attributes:
+      label: "Ansvarig partner"
+      options:
+        - Partner A (Investerare)
+        - Partner B (Byggherre)
+        - Båda
+        - Externt (specificera i beskrivning)

@@ -1,4 +1,25 @@
-# CODEOWNERS - Define code ownership and review requirements
-# All files require review from the team
+# CODEOWNERS – Code review requirements for PR approvals
+#
+# Format: <path> <@github-user> [@github-user-2]
+#
+# NOTE: For agent trigger authorization, see .github/authorized-users.txt.
+#       CODEOWNERS is ONLY for code review requirements.
 
+# Default owner for the entire repo
 * @aydabd
+
+# Partnership docs require both partners' approval (add partner username)
+/partnership/ @aydabd
+
+# Agent definitions and skills — admin only
+/agents/ @aydabd
+/skills/ @aydabd
+
+# GitHub Actions and workflows — admin only
+/.github/ @aydabd
+
+# Python source code — admin only
+/src/ @aydabd
+
+# Examples are public references
+/examples/ @aydabd

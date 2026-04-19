@@ -1,0 +1,9 @@
+.git/
+node_modules/
+outputs/
+analyses/
+coverage/
+htmlcov/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/

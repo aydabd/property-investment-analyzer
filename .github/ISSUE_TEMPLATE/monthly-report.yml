@@ -1,0 +1,85 @@
+name: Monthly Report
+description: Byggherrens månadsrapport till investerare
+title: "[Monthly Report] <Projekt> – <Månad YYYY-MM>"
+labels: ["monthly-report", "partner-builder"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # Månadsrapport
+        Fyll i baserat på mallen i `partnership/monthly-report-template.md`.
+        Använd som underlag för uppföljning mellan investerare och byggherre.
+
+  - type: input
+    id: project
+    attributes:
+      label: "Projekt-issue"
+      placeholder: "#42"
+    validations:
+      required: true
+
+  - type: input
+    id: month
+    attributes:
+      label: "Rapportperiod (YYYY-MM)"
+      placeholder: "2026-05"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: status
+    attributes:
+      label: "Övergripande status"
+      options:
+        - "🟢 På plan"
+        - "🟡 Mindre avvikelser"
+        - "🔴 Betydande avvikelser – stopp-möte rekommenderas"
+    validations:
+      required: true
+
+  - type: textarea
+    id: completed
+    attributes:
+      label: "Utfört denna månad"
+      description: "Milstolpar och arbete"
+    validations:
+      required: true
+
+  - type: textarea
+    id: economy
+    attributes:
+      label: "Ekonomi"
+      description: "Utfall vs budget, räntekostnad, lånutnyttjning"
+      value: |
+        | Post | Budget | Utfall | Diff |
+        |---|---|---|---|
+        | Material | | | |
+        | Arbete | | | |
+        | UE | | | |
+        | **Totalt** | | | |
+
+        Bygglån utnyttjat: X kr av Y kr
+        Räntekostnad denna månad: X kr
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: "Nya/ändrade risker"
+
+  - type: textarea
+    id: decisions-needed
+    attributes:
+      label: "Beslut som kräver partnerns godkännande"
+      placeholder: "Enligt RACI, vilka beslut behöver investerare-partnerns OK?"
+
+  - type: textarea
+    id: next-month
+    attributes:
+      label: "Planerat nästa månad"
+
+  - type: textarea
+    id: attachments
+    attributes:
+      label: "Bifogade dokument"
+      placeholder: "Foton, fakturor, UE-kontrakt (ladda upp i kommentarer)"

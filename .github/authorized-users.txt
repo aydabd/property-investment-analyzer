@@ -1,0 +1,7 @@
+# Authorized users who can trigger investment analysis agents.
+# One GitHub username per line (without @).
+# Add partner usernames below after they create a GitHub account.
+#
+# NOTE: Phase 12 will move this to a repo secret (AUTHORIZED_USERS).
+#       This file is a temporary solution until then.
+aydabd

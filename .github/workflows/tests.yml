@@ -1,0 +1,49 @@
+name: Tests
+
+on:
+  push:
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "pyproject.toml"
+      - ".github/workflows/tests.yml"
+  pull_request:
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "pyproject.toml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"]
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Run pytest
+        env:
+          ANTHROPIC_API_KEY: "sk-ant-test-mock"
+          GH_TOKEN: "ghp_test_mock"
+        run: pytest tests/ -v --cov=property_investment_planner --cov-report=term-missing
+
+      - name: Upload coverage to job summary
+        if: always()
+        run: |
+          echo "## Test Coverage" >> $GITHUB_STEP_SUMMARY
+          pytest tests/ --cov=property_investment_planner --cov-report=term | tee -a $GITHUB_STEP_SUMMARY || true

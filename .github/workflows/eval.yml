@@ -1,0 +1,43 @@
+name: Eval Agent Outputs
+
+on:
+  pull_request:
+    paths:
+      - "analyses/**"
+      - "agents/**"
+  workflow_dispatch:
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Request Copilot review
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          if [[ -z "$PR_NUMBER" || "$PR_NUMBER" == "0" ]]; then
+            echo "No PR number — skipping Copilot review request"
+            exit 0
+          fi
+
+          # Check if the PR modifies analysis outputs
+          ANALYSIS_FILES=$(gh pr diff "$PR_NUMBER" --name-only | grep "^analyses/" || true)
+          if [[ -z "$ANALYSIS_FILES" ]]; then
+            echo "No analysis files in PR — skipping"
+            exit 0
+          fi
+
+          echo "📋 Analysis files in PR:"
+          echo "$ANALYSIS_FILES"
+
+          # Request Copilot as reviewer — it will use the eval agent instructions
+          # from agents/99-eval.md via copilot-instructions.md
+          gh pr edit "$PR_NUMBER" --add-reviewer @copilot 2>/dev/null || \
+            echo "Could not add Copilot as reviewer (may require Copilot Enterprise)"

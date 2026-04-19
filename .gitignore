@@ -20,6 +20,9 @@ Thumbs.db
 *.dll
 *.so
 *.dylib
+__pycache__/
+*.pyc
+.mypy_cache/
 
 # Dependencies
 /node_modules/
@@ -46,3 +49,9 @@ htmlcov/
 *.tmp
 *.temp
 .cache/
+
+# pre-commit cache
+.pre-commit-cache/
+
+# micromamba / conda environment (never commit the env itself)
+.micromamba/
