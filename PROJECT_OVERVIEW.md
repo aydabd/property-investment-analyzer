@@ -4,7 +4,7 @@ Komplett filöversikt av repot. Använd som kartbok för att förstå vad som fi
 
 ## 🗂 Filträd
 
-```
+```text
 .
 ├── README.md                          ← Start här
 ├── SETUP.md                           ← Installation
@@ -63,9 +63,9 @@ Komplett filöversikt av repot. Använd som kartbok för att förstå vad som fi
 
 ## 📊 Räkneexempel (filmängd)
 
-- **8 agenter** som kan köras individuellt eller i sekvens
+- **10 agenter** som kan köras individuellt eller i sekvens
 - **3 issue-templates** för olika scenarier
-- **2 workflows** som triggar automation
+- **3 workflows** som triggar automation (run-analysis, eval, tests)
 - **2 Python-scripts** som gör det körbart
 - **3 partnerskap-dokument** för konfliktförebyggande
 - **2 skills** (data + formler) som alla agenter kan referera till
@@ -108,7 +108,8 @@ Komplett filöversikt av repot. Använd som kartbok för att förstå vad som fi
 
 - Känsliga avtal (`partnership/signed-*.md`) ignoreras i git (se `.gitignore`)
 - API-nyckel lagras som repo-secret, aldrig i kod
-- CODEOWNERS gate:ar vem som kan trigga analyser
+- `authorized-users.txt` gate:ar vem som kan trigga analyser
+- CODEOWNERS styr kodgranskning och ägarskap
 - Privata repos rekommenderas – analyser innehåller finansiell data
 
 ## 📚 Att Läsa i Ordning (för ny användare)

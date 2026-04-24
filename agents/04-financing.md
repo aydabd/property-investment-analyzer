@@ -138,7 +138,7 @@ BYGGKREDIT = TOTAL - EK
 
 ## Output Format
 
-```markdown
+````markdown
 ## Financing Analysis
 
 ### Räntemarknad 2026 (verifierad)
@@ -171,50 +171,54 @@ BYGGKREDIT = TOTAL - EK
 | **TOTAL RÄNTA** |                           |           | **X kr**    |
 
 ### Total Investering (inkl. ränta)
-```
 
+```text
 Subtotal före ränta: X kr
 Räntekostnad byggtid: X kr
 ─────────────────────────────────
 TOTAL: X kr
-
 ```
+````
 
 ### Kapitalstruktur
+
 - EK (20%): X kr
 - Byggkreditiv (80%): X kr
 
 ### Skatt vid Försäljning
 
-| Struktur | Bruttovinst | Skatt | Netto |
-|---|---|---|---|
-| Privat kapitalvinst 22% | X kr | X kr | X kr |
-| Privat + uppskov | X kr | 0 (uppskjutet) | X kr |
-| Via AB (20,6%) | X kr | X kr | X kr |
+| Struktur                | Bruttovinst | Skatt          | Netto |
+| ----------------------- | ----------- | -------------- | ----- |
+| Privat kapitalvinst 22% | X kr        | X kr           | X kr  |
+| Privat + uppskov        | X kr        | 0 (uppskjutet) | X kr  |
+| Via AB (20,6%)          | X kr        | X kr           | X kr  |
 
 **Rekommendation**: [struktur] baserat på [skäl].
 
 ### Räntekänslighet
 
-| Byggkreditivs-ränta | Ränta totalt | ROI-påverkan |
-|---|---|---|
-| 4,0% (optimistiskt) | X kr | +X% |
-| 4,99% (realistiskt) | X kr | basscenario |
-| 6,0% | X kr | -X% |
-| 7,0% (pessimistiskt) | X kr | -X% |
+| Byggkreditivs-ränta  | Ränta totalt | ROI-påverkan |
+| -------------------- | ------------ | ------------ |
+| 4,0% (optimistiskt)  | X kr         | +X%          |
+| 4,99% (realistiskt)  | X kr         | basscenario  |
+| 6,0%                 | X kr         | -X%          |
+| 7,0% (pessimistiskt) | X kr         | -X%          |
 
 **Break-even-ränta**: X% (över denna blir projektet olönsamt)
 
 ### Likviditetsplan
+
 - Månad 0 (tilldelning): krävs X kr EK tillgängligt
 - Månad 5 (grund klar): EK fullt utnyttjat
 - Månad 14 (slutbesked): byggkredit maximalt X kr
 - Månad 15–18 (försäljning): intäkt X kr, löser byggkredit
 
 ### Varningar
+
 - [Om EK < minimum → varning]
 - [Om ränta > break-even → varning]
-- [Om byggtid > 14 mån → arrendeår-risk]
+- [Om arrendeår-risk]
+
 ```
 
 ## Eskalering
@@ -222,3 +226,4 @@ TOTAL: X kr
 - Om kapital-brist → ping partnership-agent för ny EK-struktur
 - Om ränterisk hög → ping risk-agent
 - Skattedetaljer → rekommendera att kontakta revisor för specifika fall
+```

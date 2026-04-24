@@ -1,5 +1,11 @@
 # Meta-Agent: Template Generator
 
+> **Obs:** Denna agent är ett pedagogiskt verktyg för att vägleda användaren att
+> formulera en välstrukturerad issue. Dess output är markdown som användaren
+> **manuellt granskar och kopierar** till GitHub Issues — den parsas inte direkt
+> av `parse_issue_body()`. Det korrekta formatet för issues som körs av
+> analyssystemet definieras i `.github/ISSUE_TEMPLATE/investment-analysis.yml`.
+
 ## Role
 
 **Första-kontakt-agent** som hjälper användaren skapa en välformulerad issue att

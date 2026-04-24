@@ -44,7 +44,7 @@ Exempel på bra skills:
 `src/property_investment_planner/` innehåller orkestreringen. Bidrag här kräver:
 
 - Tester (`tests/`)
-- Typer (mypy strict mode)
+- Typer (mypy rekommenderat, inte blockerande i CI)
 - Docstrings (Google-stil)
 - Ruff-clean
 
@@ -78,7 +78,7 @@ mypy src/
 
 Använd [Conventional Commits](https://www.conventionalcommits.org/):
 
-```
+```text
 feat: lägg till radon-agent
 fix: korrigera ränte-beräkning över månaderna
 docs: förtydliga partnerskapsmodellen

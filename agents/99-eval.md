@@ -148,7 +148,10 @@ def decide_action(eval_result):
 
 Om agenten hittar brister:
 
-1. Kommenterar i issue med vilka agenter som ska köras om
-2. Trigger `/rerun <agent-name>` automatiskt
-3. När fixes är klara, kör Eval igen
+1. Kommenterar i issue med vilka agenter som behöver köras om
+2. Användaren kör `/rerun all` för att starta om analysen från början
+3. När ny analys är klar, kör Eval igen
 4. Max 3 iterationer, annars flagga till människa
+
+> **Obs:** Partiell årerkörning (`/rerun <agent-name>`) stöds inte av workfloden.
+> Feedback-loopen använder alltid full restart via `/rerun all`.

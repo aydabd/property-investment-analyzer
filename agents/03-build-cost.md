@@ -73,7 +73,9 @@ installationsmaterial: 2000-2500 kr/kvm # el, VS, ventilation, VP
 
 tillägg_per_kvm_om_krav:
   stenfasad: +500-800 kr/kvm
-  radonsäkrad_grund: +200-300 kr/kvm (extra för hela tomten, ej per kvm)
+
+tillägg_per_projekt_om_krav:
+  radonsakrad_grund: branschstandard-estimat (verifiera per projekt, ca 20 000-40 000 kr totalt)
 
 kök_bad_per_enhet:
   standard_kök: 65000-100000 kr

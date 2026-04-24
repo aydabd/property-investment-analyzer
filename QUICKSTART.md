@@ -18,7 +18,7 @@ I repot: **Settings → Copilot → Coding Agent → Enable**.
 
 Redigera `.github/CODEOWNERS` och byt:
 
-```
+```text
 * @REPLACE_WITH_YOUR_USERNAME
 ```
 
@@ -110,7 +110,7 @@ PR-kommentarer är perfekt för det:
 
 - Kommentera specifika avsnitt
 - Ställ uppföljningsfrågor
-- `/rerun <agent-name>` för att iterera
+- `/rerun all` för att köra om analysen från början
 
 ### Fatta beslut
 
@@ -124,12 +124,12 @@ PR-kommentarer är perfekt för det:
 
 Litet/okänt område? Kommentera i issue:
 
-```
+```text
 @01-market-research: Jag har kollat Booli och senaste nyproduktion i området var
 [X kr/kvm för Y kvm, sålt datum Z]. Använd detta som referens.
 ```
 
-Och `/rerun 01-market-research`.
+Och `/rerun all`.
 
 ### "Workflow körs inte"
 
@@ -155,7 +155,7 @@ Ja. Varje issue = en analys. Använd labels + Projects för att hålla ordning
 
 ## Tips för Effektiv Användning
 
-- Kör `/rerun` bara på den agent som behövde fixas, inte `all`
+- Kör `/rerun all` för att starta om analysen med uppdaterat underlag
 - Fyll i issue noggrant → färre iterationer
 - Använd `meta-template-generator`-agenten en gång, sedan kan du följa samma mönster själv
 

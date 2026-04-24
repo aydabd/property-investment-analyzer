@@ -113,20 +113,21 @@ Partner B:s arbetskompensation: 2 000 × 500 = 1 000 000 kr
   (Detta är EN KOSTNAD i projektet före vinstdelning)
 
 Vinst efter arbetskompensation:
-  Projekt: 9 400 000 - 7 600 000 - 264 000 (mäklare) = 1 536 000 kr brutto
-  Efter skatt 22%: 1 198 000 kr
-  Efter B:s arbetskomp: 198 000 kr
+  Projekt brutto: 9 400 000 - 7 600 000 - 264 000 (mäklare) = 1 536 000 kr
+  Minus B:s arbetskomp (projektkostnad): -1 000 000 kr
+  Skattepliktig vinst: 536 000 kr
+  Efter skatt 22%: 418 080 kr
 
-Resterande 198 000 kr delas kapital-proportionellt (50/50):
-  A: 99 000 kr
-  B: 99 000 kr
+Resterande 418 080 kr delas kapital-proportionellt (50/50):
+  A: 209 040 kr
+  B: 209 040 kr
 
-Total till B: 1 000 000 + 99 000 = 1 099 000 kr
-Total till A: 99 000 kr
+Total till B: 1 000 000 + 209 040 = 1 209 040 kr
+Total till A: 209 040 kr
 
 → Nu får B nästan "full lön" + lite vinst.
-→ Nu får A bara 99 000 kr, vilket är 13% på 14 månader = 11% annualiserat.
-   Inte fantastiskt men säkert och passivt.
+→ Nu får A 209 040 kr, vilket är 28% på 14 månader = 24% annualiserat.
+   Bättre än Metod 2 för A tack vare korrekt skatteredovisning.
 ```
 
 ## Vilken Metod Ska Du Välja?

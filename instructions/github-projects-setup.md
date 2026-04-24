@@ -36,7 +36,7 @@ För varje aktivt projekt, skapa milestones:
 ```
 Milestone: [Projekt X] - Analysfas
   Due: +2 veckor från issue
-  Issues: analysis, planbesked, finansiering-check
+  Issues: analysis-in-progress, planbesked, finansiering-check
 
 Milestone: [Projekt X] - Beslutsfas
   Due: +2 veckor från analys
@@ -59,8 +59,8 @@ Milestone: [Projekt X] - Klart
 
 ### Per fas
 
-- `analysis` – agenter kör
-- `decision-pending` – väntar på partner/bank
+- `analysis-in-progress` – agenter kör
+- `decision-made` – partners/bank har beslutat GO/STOPP
 - `building` – aktivt bygge
 - `selling` – till försäljning
 - `completed` – klar
@@ -108,7 +108,7 @@ Projects visar automatiskt:
 
 ### Partner-reporting
 
-Filtrera Project-vy på label `partner-a` eller `partner-b`:
+Filtrera Project-vy på label `partner-investor` eller `partner-builder`:
 
 - Se bara dina egna uppgifter
 - Följ månadsrapporter (se `partnership/monthly-report-template.md`)

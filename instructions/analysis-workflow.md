@@ -30,7 +30,7 @@ en användare kör systemet.
        │<──────────────────────│                           │
        │                       │                           │
        │ 18. Merge eller       │                           │
-       │   /rerun <agent>      │                           │
+       │   /rerun all          │                           │
        ├──────────────────────>│                           │
 ```
 
@@ -98,7 +98,7 @@ Användare (och partner, om tillämpligt):
 
 - Läser `final-report.md` direkt i PR
 - Kan kommentera specifika sektioner
-- Kan kräva revideringar via `/rerun <agent-name>`
+- Kan kräva revideringar via `/rerun all`
 
 ### Steg 18: Slutbeslut
 
@@ -108,10 +108,12 @@ Användare (och partner, om tillämpligt):
 
 ## Kommandon i Issues/PR
 
-| Kommando              | Effekt                                         |
-| --------------------- | ---------------------------------------------- |
-| `/rerun all`          | Kör om hela analysen från scratch              |
-| `/rerun <agent-name>` | Kör bara en agent igen (t.ex. `03-build-cost`) |
+| Kommando     | Effekt                            |
+| ------------ | --------------------------------- |
+| `/rerun all` | Kör om hela analysen från scratch |
+
+> **Obs:** Partiell årerkörning (`/rerun <agent-name>`) är inte implementerad.
+> Workfloden stöder bara full restart. Planeras i framtida version.
 
 ## Tid
 
@@ -131,8 +133,7 @@ Användare (och partner, om tillämpligt):
 
 ### Agent ger dåligt svar
 
-- Kommentera `/rerun <agent-name>`
-- Eller redigera din issue med mer data, sedan `/rerun all`
+- Redigera din issue med mer data, sedan `/rerun all`
 
 ### PR skapas inte
 

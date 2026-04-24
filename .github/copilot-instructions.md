@@ -57,19 +57,18 @@ Reference files in `skills/` for domain knowledge:
 
 ## Handling /rerun Commands
 
-If a user comments `/rerun <agent-name>` on the issue:
+If a user comments `/rerun all` (or just `/rerun`):
 
 - Re-read the issue (it may have been edited)
-- Re-run only that specific agent
-- Update the report PR with the new output
-
-If a user comments `/rerun all` or just `/rerun`:
-
 - Re-run the complete analysis from scratch
+
+> **Note:** Partial-agent reruns (`/rerun <agent-name>`) are **not supported** by
+> the current workflow — there is no persistent state for mid-run resumption.
+> A full restart is the only supported path.
 
 ## File Structure for Output
 
-```
+```text
 analyses/issue-<N>/
 ├── final-report.md          # Complete assembled report
 └── agent-outputs/

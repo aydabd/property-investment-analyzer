@@ -265,9 +265,10 @@ Vinstfördelning (1 237 504 kr):
 
 **Partner B (aktiv)**:
 
-- På EK (750k): kapitalavkastning + arbetskompensation
-- Effektivt timlön för 1 950 h: ~436 kr/h (under marknadslön 500 kr/h)
-- Total (kapital + arbete): 850 164 kr – likvärdigt med att lönearbeta + investera
+- Kapitalavkastning på 750k EK: ~51% (382 500 kr) – samma räntabilitet som Partner A
+- Arbetskompensation (1 950 h): 850 164 − 382 500 = **467 664 kr** ≈ 240 kr/h
+  _(notera: under marknadslön ~500 kr/h, men kombinerat med kapitalavkastning)_
+- Total (kapital + arbete): **850 164 kr** – likvärdigt med att lönearbeta + investera
 
 ### RACI-matris (förenklad)
 

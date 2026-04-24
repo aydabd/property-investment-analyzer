@@ -63,7 +63,7 @@ Detaljer: [QUICKSTART.md](QUICKSTART.md) | [SETUP.md](SETUP.md)
 │   ├── ISSUE_TEMPLATE/        ← 3 mallar (analys, månadsrapport, sub-task)
 │   └── workflows/             ← 3 workflows (analys, eval, tests)
 │
-├── agents/                    ← 9 generiska agenter
+├── agents/                    ← 10 generiska agenter
 │   ├── 00-orchestrator.md     ← Koordinerar
 │   ├── 01-market-research.md  ← Ortspriser
 │   ├── 02-plot-analysis.md    ← Detaljplan
@@ -101,7 +101,9 @@ Detaljer: [QUICKSTART.md](QUICKSTART.md) | [SETUP.md](SETUP.md)
 
 ## Tekniska val
 
-- **Copilot Coding Agent** — ingen extern API-nyckel krävs
+- **Copilot Coding Agent** — ingen extern API-nyckel krävs (primär användning)
+- **Anthropic API** — krävs endast av de fristående Python-runners (`run_analysis.py`,
+  `run_eval.py`). Sätt `ANTHROPIC_API_KEY` som repo-secret om du använder dem.
 - GitHub Actions för auth-kontroll och trigger
 - Agent-instruktioner i markdown (`agents/*.md`)
 - Python 3.13+ verktygskod (pydantic, mypy) för helpers och tester

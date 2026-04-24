@@ -388,6 +388,9 @@ def main(issue_number: int, repo: str, agents: str) -> None:
         sys.exit(1)
     logger.info(f"Will run agents: {agent_list}")
 
+    # Inject issue number so the report template can render {{meta:issue_number}}
+    issue_data["_issue_number"] = issue_number
+
     # Execute agents sequentially, passing previous outputs
     agent_outputs: dict[str, str] = {}
     for agent_name in agent_list:
@@ -410,7 +413,7 @@ def main(issue_number: int, repo: str, agents: str) -> None:
                     logger.info(f"Agent {agent_name} has blocking questions - pausing")
                     issue.create_comment(
                         "⏸ Analysen pausar tills frågor besvarats."
-                        " Kommentera `/continue` när du svarat."
+                        " Redigera issue och kommentera `/rerun all` när du svarat."
                     )
                     return
 

@@ -67,7 +67,7 @@ Skicka in. GitHub Action startar automatiskt.
 
 - Läs rapporten i PR:en
 - Om det ser bra ut → merge till `main` (arkiveras)
-- Om du vill justera → kommentera `/rerun <agent-name>` i PR
+- Om du vill justera → kommentera `/rerun all` i issue (startar om analysen från början)
 
 ## Alternativa sätt att köra
 

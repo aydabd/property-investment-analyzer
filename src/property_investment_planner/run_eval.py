@@ -6,6 +6,7 @@ Invoked by .github/workflows/eval.yml when a PR with analysis is opened.
 from __future__ import annotations
 
 import re
+import shutil
 from pathlib import Path
 from typing import TYPE_CHECKING
 
@@ -27,12 +28,16 @@ def _resolve_issue_number(pr_number: int) -> int | None:
     try:
         import subprocess
 
+        gh = shutil.which("gh")
+        if gh is None:
+            raise FileNotFoundError("gh")
+
         result = subprocess.run(
-            ["gh", "pr", "view", str(pr_number), "--json", "headRefName", "-q", ".headRefName"],
+            [gh, "pr", "view", str(pr_number), "--json", "headRefName", "-q", ".headRefName"],
             capture_output=True,
             text=True,
             check=True,
-        )
+        )  # noqa: S603 - safe since we control the input and it's not shell=True
         match = re.search(r"issue-(\d+)", result.stdout.strip())
         if match:
             return int(match.group(1))
