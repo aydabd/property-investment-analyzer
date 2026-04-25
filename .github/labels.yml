@@ -1,0 +1,83 @@
+# GitHub Labels Configuration
+# Applicera via: gh label create (eller använd actions/github-script)
+
+# Faser i investeringen
+- name: investment-analysis
+  color: "0e8a16"
+  description: "Huvud-issue för en investeringsanalys"
+
+- name: analysis-in-progress
+  color: "fbca04"
+  description: "Agenter kör för närvarande"
+
+- name: needs-input
+  color: "d93f0b"
+  description: "Agent väntar på användar-input"
+
+- name: analysis-complete
+  color: "0075ca"
+  description: "Analys klar, redo för beslut"
+
+- name: decision-made
+  color: "5319e7"
+  description: "Partners har beslutat GO/STOPP"
+
+- name: building
+  color: "c2e0c6"
+  description: "Aktivt byggprojekt"
+
+- name: selling
+  color: "fef2c0"
+  description: "Till försäljning eller under bud"
+
+- name: completed
+  color: "006b75"
+  description: "Projektet avslutat och redovisat"
+
+# Risknivåer
+- name: risk-high
+  color: "b60205"
+  description: "Kritisk risk identifierad"
+
+- name: risk-medium
+  color: "d93f0b"
+  description: "Medelhög risk att bevaka"
+
+- name: risk-low
+  color: "0e8a16"
+  description: "Låg risk"
+
+# Partner-fokus
+- name: partner-investor
+  color: "bfd4f2"
+  description: "Investerar-fokuserat"
+
+- name: partner-builder
+  color: "d4c5f9"
+  description: "Byggherre-fokuserat"
+
+- name: joint
+  color: "c5def5"
+  description: "Båda parter"
+
+# Sub-tasks
+- name: sub-task
+  color: "cccccc"
+  description: "Underuppgift till huvud-issue"
+
+- name: monthly-report
+  color: "e4e669"
+  description: "Månadsrapport från byggherre"
+
+- name: decision-point
+  color: "ff9500"
+  description: "Kritiskt beslut krävs"
+
+# Rapport-typer
+- name: analysis-report
+  color: "0075ca"
+  description: "Auto-genererad analysrapport (PR)"
+
+- name: eval-failed
+  color: "b60205"
+  description: "Eval-agenten flaggade problem"

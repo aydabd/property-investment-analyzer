@@ -1,91 +1,158 @@
-# property-investment-analyzer
+# 🏗️ Property Investment Planner
 
-[![Super-Linter](https://github.com/aydabd/property-investment-analyzer/actions/workflows/super-linter.yml/badge.svg)](https://github.com/aydabd/property-investment-analyzer/actions/workflows/super-linter.yml)
+GitHub-native, AI-driven analyssystem för **bygg-och-sälj-investeringar** i svenska kommuner.
+Designad för **partnerskap mellan investerare och byggherre**.
 
-## Overview
+**👉 Ny användare? Börja med [QUICKSTART.md](QUICKSTART.md)**
 
-Brief project description following SOLID principles, TDD, and DDD architecture patterns.
+## Hur det fungerar
 
-## Architecture
+```text
+1. Skapa Issue (använd mall)
+     ↓
+2. GitHub Action triggas → Copilot tilldelas issue
+     ↓
+3. Copilot läser agent-instruktioner och analyserar steg-för-steg
+     ↓
+4. Copilot kommenterar i issue, ber om data om det behövs
+     ↓
+5. Copilot skapar PR med komplett rapport
+     ↓
+6. Granska, kommentera, merge
+```
 
-This project follows:
+## Vem använder detta?
 
-- **SOLID principles** for maintainable code
-- **Test-Driven Development** (TDD) for reliability
-- **Domain-Driven Design** (DDD) for clear business logic
-- **Type-safe** implementation
-- **Dependency injection** for testability
+- **Investerare** – vill bedöma en specifik tomt/kommun
+- **Byggherrar** – vill verifiera kalkyl innan budgivning
+- **Partnerskap** – 2+ personer som delar investering och arbete
 
-## Development
+## Snabbstart
 
-### Prerequisites
+1. **Fork detta repo** (eller använd som template)
+2. **Aktivera Copilot Coding Agent** i repo-inställningarna
+3. **Lägg till dig i `.github/authorized-users.txt`** för agent-trigger
+4. **Redigera CODEOWNERS** med ditt användarnamn (för PR-granskning)
+5. **Skapa en Issue** med mallen `Investment Analysis`
+6. **Copilot analyserar** — ställer frågor och levererar rapport som PR
 
-List required tools and versions here.
+Detaljer: [QUICKSTART.md](QUICKSTART.md) | [SETUP.md](SETUP.md)
 
-### Setup
+## Dokumentation
+
+| Dokument                                                                       | Syfte                            |
+| ------------------------------------------------------------------------------ | -------------------------------- |
+| [QUICKSTART.md](QUICKSTART.md)                                                 | 15-min guide för första analysen |
+| [SETUP.md](SETUP.md)                                                           | Detaljerad installation          |
+| [PROJECT_OVERVIEW.md](PROJECT_OVERVIEW.md)                                     | Filstruktur och design-principer |
+| [partnership/README.md](partnership/README.md)                                 | Partnerskapsmodellen             |
+| [instructions/analysis-workflow.md](instructions/analysis-workflow.md)         | Hur flödet fungerar              |
+| [instructions/github-projects-setup.md](instructions/github-projects-setup.md) | Milestones och kanban            |
+| [examples/01-stangby-beryllen.md](examples/01-stangby-beryllen.md)             | Komplett exempel-analys          |
+
+## Repo-struktur
+
+```text
+.
+├── README.md                  ← Start
+├── QUICKSTART.md              ← 15-min guide
+├── SETUP.md                   ← Installation
+├── pyproject.toml             ← Python-paket (hatchling)
+│
+├── .github/
+│   ├── ISSUE_TEMPLATE/        ← 3 mallar (analys, månadsrapport, sub-task)
+│   └── workflows/             ← 3 workflows (analys, eval, tests)
+│
+├── agents/                    ← 10 generiska agenter
+│   ├── 00-orchestrator.md     ← Koordinerar
+│   ├── 01-market-research.md  ← Ortspriser
+│   ├── 02-plot-analysis.md    ← Detaljplan
+│   ├── 03-build-cost.md       ← Byggkostnader
+│   ├── 04-financing.md        ← Räntor, skatt
+│   ├── 05-risk.md             ← Risker
+│   ├── 06-partnership.md      ← Partner-struktur
+│   ├── 07-optimizer.md        ← Slutbeslut
+│   ├── 99-eval.md             ← QA
+│   └── meta-template-generator.md  ← Hjälp nybörjare
+│
+├── skills/                    ← Återanvändbar kunskap
+├── partnership/               ← Avtalsmallar
+├── templates/                 ← Rapportmall
+├── instructions/              ← Processdokument
+├── src/
+│   └── property_investment_planner/  ← Python-paket
+├── tests/                     ← Pytest-svit
+└── examples/                  ← Riktiga analyser
+```
+
+## Design-principer
+
+**Generiskt** – agenterna frågar användaren efter kommun, tomt, priser. Ingen hårdkodning.
+
+**Partnerskaps-medvetet** – varje finansiell kalkyl delas upp mellan investerare och byggherre enligt överenskommen modell.
+
+**GitHub-native** – inga servrar, ingen cloud. Bara issues, actions, projects, artifacts.
+
+**Transparent** – alla antaganden, räntor, skatter synliga i rapporten.
+
+**Bygg-och-sälj-fokus** – uthyrning är **inte** inkluderat. Kort horisont, realiserad vinst, reinvestering.
+
+**Testat** – Python-scripten har pytest-tests som körs vid varje PR.
+
+## Tekniska val
+
+- **Copilot Coding Agent** — ingen extern API-nyckel krävs (primär användning)
+- **Anthropic API** — krävs endast av de fristående Python-runners (`run_analysis.py`,
+  `run_eval.py`). Sätt `ANTHROPIC_API_KEY` som repo-secret om du använder dem.
+- GitHub Actions för auth-kontroll och trigger
+- Agent-instruktioner i markdown (`agents/*.md`)
+- Python 3.13+ verktygskod (pydantic, mypy) för helpers och tester
+- Tester med `pytest` och `conftest.py` för modulär setup/teardown
+- [micromamba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html) för isolerad utvecklingsmiljö
+- [pre-commit](https://pre-commit.com/) för all linting (single source of truth)
+
+## Utvecklingsmiljö
+
+All lintning och formatering körs via **pre-commit** inuti en
+**micromamba**-miljö. Inga manuella installationer behövs.
 
 ```bash
-git clone <repository-url>
-cd <repository-name>
-
-# Install dependencies
+# Engångs-setup (installerar miljö + Git hooks)
 make install
-```
 
-### Running Tests
-
-```bash
-# Run all tests
-make test
-
-# Run with coverage
-make coverage
-```
-
-### Linting
-
-```bash
-# Run super-linter locally (check only)
+# Lint och auto-formatera (lokal utveckling)
 make lint
 
-# Run super-linter with autofix
-make lint-fix
+# Kör tester
+make test
+
+# Kör tester med coverage
+make coverage
+
+# Visa alla tillgängliga kommandon
+make help
 ```
 
-The repository includes GitHub Super-Linter for consistent code quality:
+### CI
 
-- **Automatic formatting** on pull requests
-- **Language-agnostic linting** for Markdown, YAML, JSON, XML, and EditorConfig
-- **Programming language validation** configured in `.super-linter.env`
-- **Local linting** with Docker via `make lint` commands
+CI kör samma `make lint` med `LINT_MODE=check` — inga auto-fixar,
+bara verifiering. Samma verktyg, samma konfiguration, samma resultat.
 
-## Code Standards
+## Bidra
 
-- **Indentation**: 4 spaces (code), 2 spaces (YAML/JSON)
-- **Linting**: Enforced via pre-commit hooks
-- **Formatting**: Autoformat before commit
-- **Type safety**: Strictly enforced
-- **No trailing whitespace**
+Har du förbättringar till en agent? Ett nytt skill? Ett exempel att dela?
+Öppna en PR. Se [`CONTRIBUTING.md`](CONTRIBUTING.md) för mall och riktlinjer.
 
-## Contributing
+## Ingen Garanti
 
-1. Create feature branch from `main`
-2. Write tests first (TDD)
-3. Implement feature
-4. Ensure all tests pass
-5. Run linter and formatter
-6. Submit PR (requires 2 approvals)
+Detta är en **analysassistent**, inte en finansiell rådgivare. Verifiera alltid
+kritiska siffror innan bindande beslut. Kontakta:
 
-See CONTRIBUTING.md and CODEOWNERS for details.
+- Revisor för skatt
+- Fastighetsjurist för avtal
+- Bank för lånevillkor
+- Kommunen för planrätt
 
-## Testing Philosophy
+## Licens
 
-- All code must be testable
-- Unit tests for all modules
-- Integration tests for components
-- Test fixtures separated by module
-- Minimum 80% coverage
-
-## License
-
-See LICENSE file for details.
+MIT – använd, fork:a, modifiera efter behov. Se LICENSE.

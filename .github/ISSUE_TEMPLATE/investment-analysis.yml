@@ -1,0 +1,150 @@
+name: Investment Analysis
+description: Starta en komplett analys av en husbyggnads-investering
+title: "[Analysis] <Kommun> – <Område/Tomt>"
+labels: ["investment-analysis", "needs-triage"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # Investeringsanalys
+        Fyll i allt du vet. Agenterna frågar efter resten genom kommentarer.
+        **Du kan lämna fält tomma** – agenterna hjälper dig fylla i.
+
+  - type: input
+    id: kommun
+    attributes:
+      label: "Kommun"
+      description: "Vilken kommun ligger tomten i?"
+      placeholder: "t.ex. Lund, Malmö, Uppsala"
+    validations:
+      required: true
+
+  - type: input
+    id: omrade
+    attributes:
+      label: "Område / Stadsdel"
+      description: "Stadsdel eller orten inom kommunen"
+      placeholder: "t.ex. Stångby, Limhamn, Flogsta"
+    validations:
+      required: true
+
+  - type: input
+    id: fastighetsbeteckning
+    attributes:
+      label: "Fastighetsbeteckning"
+      description: "Officiell fastighetsbeteckning om känd"
+      placeholder: "t.ex. Lund Beryllen 5"
+
+  - type: input
+    id: tomtpris
+    attributes:
+      label: "Tomtpris (SEK)"
+      description: "Erbjudet pris från kommun eller säljare"
+      placeholder: "t.ex. 2080000"
+    validations:
+      required: true
+
+  - type: input
+    id: tomtstorlek
+    attributes:
+      label: "Tomtstorlek (kvm)"
+      placeholder: "t.ex. 660"
+    validations:
+      required: true
+
+  - type: input
+    id: deadline
+    attributes:
+      label: "Deadline (intresseanmälan / budgivning)"
+      description: "Om tomten har svarstid"
+      placeholder: "YYYY-MM-DD"
+
+  - type: input
+    id: kalla-url
+    attributes:
+      label: "Källa-URL till prospekt/tomtbeskrivning"
+      description: "Länk till officiell tomtbeskrivning (PDF eller webbsida)"
+      placeholder: "https://kommunen.se/.../prospekt.pdf"
+
+  - type: dropdown
+    id: byggkoncept
+    attributes:
+      label: "Byggkoncept"
+      options:
+        - Ett hus (enkel villa)
+        - Två hus (parhus/spegelvänt)
+        - Flerbostadshus (3+ lägenheter)
+        - Vet inte – agenterna får föreslå
+    validations:
+      required: true
+
+  - type: input
+    id: total-bta
+    attributes:
+      label: "Planerad total BTA (kvm)"
+      description: "Total boarea som planeras byggas"
+      placeholder: "t.ex. 200"
+
+  - type: dropdown
+    id: partnerskap
+    attributes:
+      label: "Partnerskap?"
+      description: "Ska projektet delas mellan flera parter?"
+      options:
+        - Nej – en investerare
+        - Ja – investerare + byggherre (ingen bygger, en sköter bygget)
+        - Ja – två eller fler jämlika partners
+    validations:
+      required: true
+
+  - type: textarea
+    id: partner-detaljer
+    attributes:
+      label: "Partnerskaps-detaljer (om tillämpligt)"
+      description: "Beskriv roller, kapitalandelar, arbetsdelning"
+      placeholder: |
+        Partner A: Investerare, 50% kapital, 0% arbete
+        Partner B: Byggherre med eget bolag, 50% kapital, sköter hela bygget
+
+  - type: input
+    id: eget-kapital
+    attributes:
+      label: "Tillgängligt eget kapital totalt (SEK)"
+      placeholder: "t.ex. 3000000"
+
+  - type: textarea
+    id: marknadsvarde
+    attributes:
+      label: "Förväntad försäljningspris (om du vet)"
+      description: "Marknadspris/kvm eller totalpris. Lämna tomt om osäker."
+      placeholder: "t.ex. 47000 kr/kvm eller 9400000 kr för hela projektet"
+
+  - type: textarea
+    id: detaljplan-info
+    attributes:
+      label: "Detaljplan (om du känner till)"
+      description: "Planbeteckning, vad som är tillåtet"
+      placeholder: |
+        Detaljplan: 1281K-P149
+        Krav: Ett friliggande hus, 2 plan, sadeltak ≥ 30°, stenfasad
+
+  - type: textarea
+    id: ovrig-info
+    attributes:
+      label: "Övrig viktig info"
+      placeholder: |
+        Radon-klass, bullerkrav, VA-typ, värmeförsörjning, etc.
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: "Bekräftelser"
+      options:
+        - label: "Jag förstår att detta är en analys, inte finansiell rådgivning"
+          required: true
+        - label: "Jag har verifierat att tomtpriset är korrekt från originalkälla"
+          required: true
+        - label: "Om partnerskap – alla parter är informerade om denna analys"
+          required: false
