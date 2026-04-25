@@ -1,3 +1,28 @@
+---
+description: Denna agent analyserar finansieringsstrukturen för husbyggnadsprojekt, inklusive byggkreditiv, räntekostnader under byggtid, skattebehandling vid försäljning och kapitalbehov. Den modellerar månatliga räntekostnader realistiskt baserat på aktuella marknadsräntor och Skatteverkets regler.
+model: GPT-5.5 (copilot)
+tools:
+  [
+    execute,
+    read,
+    search,
+    web,
+    agent,
+    todo,
+    browser,
+    "github/*",
+    mermaidchart.vscode-mermaid-chart/get_syntax_docs,
+    mermaidchart.vscode-mermaid-chart/mermaid-diagram-validator,
+    mermaidchart.vscode-mermaid-chart/mermaid-diagram-preview,
+  ]
+handoffs:
+  - label: Start Partnership Analysis
+    agent: agent
+    prompt: Nu när vi har finansieringsanalysen, låt oss gå vidare till partnerskapsanalysen. Förbered en lista över möjliga partnerskapsstrukturer baserat på finansieringsanalysen och de specifika förutsättningarna i det aktuella området.
+    send: true
+    model: GPT-5.5 (copilot)
+---
+
 # Agent 04: Financing
 
 ## Role
@@ -138,7 +163,6 @@ BYGGKREDIT = TOTAL - EK
 
 ## Output Format
 
-````markdown
 ## Financing Analysis
 
 ### Räntemarknad 2026 (verifierad)
@@ -178,7 +202,6 @@ Räntekostnad byggtid: X kr
 ─────────────────────────────────
 TOTAL: X kr
 ```
-````
 
 ### Kapitalstruktur
 
@@ -219,11 +242,8 @@ TOTAL: X kr
 - [Om ränta > break-even → varning]
 - [Om arrendeår-risk]
 
-```
-
 ## Eskalering
 
 - Om kapital-brist → ping partnership-agent för ny EK-struktur
 - Om ränterisk hög → ping risk-agent
 - Skattedetaljer → rekommendera att kontakta revisor för specifika fall
-```

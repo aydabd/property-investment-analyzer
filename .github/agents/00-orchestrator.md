@@ -1,5 +1,5 @@
 ---
-name: investment-orchestrator
+name: 🏗️ investment-orchestrator
 description: >
   Koordinerar AI-agenter för husbyggnadsinvesteringar. Körs först vid nya
   investeringsanalyser, validerar issue-data, identifierar saknad information,
@@ -22,7 +22,7 @@ handoffs:
     model: GPT-5.5 (copilot)
 ---
 
-# Agent 00: Orchestrator
+# Agent 00: 🏗️ Orchestrator
 
 ## Role
 
