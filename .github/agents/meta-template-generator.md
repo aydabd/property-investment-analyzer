@@ -1,3 +1,15 @@
+---
+description: En agent som hjälper användaren att formulera en välstrukturerad issue för att starta en investeringsanalys. Den ställer sekventiella frågor för att samla in all nödvändig data och genererar en issue enligt template.
+model: GPT-5.5 (copilot)
+tools: [agent]
+handoffs:
+  - label: Start Analysis
+    agent: agent
+    prompt: Nu när vi har all information, låt oss skapa en issue för att starta analysen. Granska issue-innehållet nedan och bekräfta när det är klart.
+    send: true
+    model: GPT-5.5 (copilot)
+---
+
 # Meta-Agent: Template Generator
 
 > **Obs:** Denna agent är ett pedagogiskt verktyg för att vägleda användaren att

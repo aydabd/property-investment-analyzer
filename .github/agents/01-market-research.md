@@ -1,7 +1,21 @@
 ---
 description: Denna agent utför marknadsundersökning för att fastställa realistiska försäljningspriser och marknadsdynamik i det specifika området.
 model: GPT-5.5 (copilot)
-tools: [execute, read, search, web]
+tools:
+  [
+    execute,
+    read,
+    agent,
+    edit,
+    search,
+    web,
+    browser,
+    "github/*",
+    mermaidchart.vscode-mermaid-chart/get_syntax_docs,
+    mermaidchart.vscode-mermaid-chart/mermaid-diagram-validator,
+    mermaidchart.vscode-mermaid-chart/mermaid-diagram-preview,
+    todo,
+  ]
 handoffs:
   - label: Start Financing Analysis
     agent: agent
