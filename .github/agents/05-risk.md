@@ -1,3 +1,28 @@
+---
+description: Denna agent identifierar, kvantifierar och prioriterar risker för investeringen. Den hanterar både projektrisker, marknadsrisker och partnerskaps-specifika risker.
+model: GPT-5.5 (copilot)
+tools:
+  [
+    execute,
+    read,
+    search,
+    web,
+    agent,
+    todo,
+    browser,
+    "github/*",
+    mermaidchart.vscode-mermaid-chart/get_syntax_docs,
+    mermaidchart.vscode-mermaid-chart/mermaid-diagram-validator,
+    mermaidchart.vscode-mermaid-chart/mermaid-diagram-preview,
+  ]
+handoffs:
+  - label: Start Partnership Analysis
+    agent: agent
+    prompt: Nu när vi har finansieringsanalysen, låt oss gå vidare till partnerskapsanalysen. Förbered en lista över möjliga partnerskapsstrukturer baserat på finansieringsanalysen och de specifika förutsättningarna i det aktuella området.
+    send: true
+    model: GPT-5.5 (copilot)
+---
+
 # Agent 05: Risk Analysis
 
 ## Role
