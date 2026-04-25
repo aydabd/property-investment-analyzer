@@ -1,29 +1,24 @@
 ---
+name: 🤝 Partnership Structure
 description: Denna agent designar en rättvis partnerskapsstruktur mellan investerare och byggherre. Den förebygger tvister genom tydlig rollfördelning, kapitalstruktur och vinstdelning. Den hanterar olika scenarion (en investerare + en byggherre, flera jämlika partners, investerare + TE-kontrakt).
-model: GPT-5.5 (copilot)
 tools:
   [
-    execute,
-    read,
-    search,
-    web,
     agent,
     todo,
+    read,
+    web,
+    search,
+    execute,
     browser,
     "github/*",
     mermaidchart.vscode-mermaid-chart/get_syntax_docs,
     mermaidchart.vscode-mermaid-chart/mermaid-diagram-validator,
     mermaidchart.vscode-mermaid-chart/mermaid-diagram-preview,
   ]
-handoffs:
-  - label: Start Partnership Analysis
-    agent: agent
-    prompt: Nu när vi har finansieringsanalysen, låt oss gå vidare till partnerskapsanalysen. Förbered en lista över möjliga partnerskapsstrukturer baserat på finansieringsanalysen och de specifika förutsättningarna i det aktuella området.
-    send: true
-    model: GPT-5.5 (copilot)
+model: GPT-5.4
 ---
 
-# Agent 06: Partnership Structure
+# Agent 06: 🤝 Partnership Structure
 
 ## Role
 

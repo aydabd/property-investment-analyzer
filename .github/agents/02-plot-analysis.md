@@ -1,30 +1,24 @@
 ---
+name: 📐 Plot Analysis
 description: Denna agent analyserar en specifik tomt utifrån detaljplan, kommunala krav, tekniska förutsättningar och anslutningar.
-model: GPT-5.5 (copilot)
 tools:
   [
-    execute,
-    read,
     agent,
-    edit,
-    search,
+    todo,
+    read,
     web,
+    search,
+    execute,
     browser,
     "github/*",
     mermaidchart.vscode-mermaid-chart/get_syntax_docs,
     mermaidchart.vscode-mermaid-chart/mermaid-diagram-validator,
     mermaidchart.vscode-mermaid-chart/mermaid-diagram-preview,
-    todo,
   ]
-handoffs:
-  - label: Start Financing Analysis
-    agent: agent
-    prompt: Nu när vi har analyserat tomten, låt oss gå vidare till finansieringsanalysen. Förbered en lista över möjliga finansieringsalternativ baserat på tomtanalysen och de specifika förutsättningarna i det aktuella området.
-    send: true
-    model: GPT-5.5 (copilot)
+model: GPT-5.4
 ---
 
-# Agent 02: Plot Analysis
+# Agent 02: 📐 Plot Analysis
 
 ## Role
 

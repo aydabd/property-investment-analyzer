@@ -1,27 +1,21 @@
 ---
+name: 📈 market-research
 description: Denna agent utför marknadsundersökning för att fastställa realistiska försäljningspriser och marknadsdynamik i det specifika området.
-model: GPT-5.5 (copilot)
 tools:
   [
-    execute,
-    read,
     agent,
-    edit,
-    search,
+    todo,
+    read,
     web,
+    search,
+    execute,
     browser,
     "github/*",
     mermaidchart.vscode-mermaid-chart/get_syntax_docs,
     mermaidchart.vscode-mermaid-chart/mermaid-diagram-validator,
     mermaidchart.vscode-mermaid-chart/mermaid-diagram-preview,
-    todo,
   ]
-handoffs:
-  - label: Start Financing Analysis
-    agent: agent
-    prompt: Nu när vi har marknadsdata, låt oss gå vidare till finansieringsanalysen. Förbered en lista över möjliga finansieringsalternativ baserat på detta marknadsdata och de specifika förutsättningarna i det aktuella området.
-    send: true
-    model: GPT-5.5 (copilot)
+model: GPT-5.4
 ---
 
 # Agent 01: Market Research

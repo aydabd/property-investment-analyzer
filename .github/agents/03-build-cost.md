@@ -1,29 +1,24 @@
 ---
+name: 🏠 Build Cost
 description: Denna agent beräknar byggkostnaden för ett hus baserat på det byggkoncept som valts i plot-analysen. Den hanterar både egen entreprenad och totalentreprenad-alternativet, och använder aktuella marknadspriser för material och arbete.
-model: GPT-5.5 (copilot)
 tools:
   [
-    execute,
-    read,
-    search,
-    web,
     agent,
     todo,
+    read,
+    web,
+    search,
+    execute,
     browser,
     "github/*",
     mermaidchart.vscode-mermaid-chart/get_syntax_docs,
     mermaidchart.vscode-mermaid-chart/mermaid-diagram-validator,
     mermaidchart.vscode-mermaid-chart/mermaid-diagram-preview,
   ]
-handoffs:
-  - label: Start Financing Analysis
-    agent: agent
-    prompt: Nu när vi har byggkostnaden, låt oss gå vidare till finansieringsanalysen. Förbered en lista över möjliga finansieringsalternativ baserat på byggkostnaden och de specifika förutsättningarna i det aktuella området.
-    send: true
-    model: GPT-5.5 (copilot)
+model: GPT-5.4
 ---
 
-# Agent 03: Build Cost
+# Agent 03: 🏠 Build Cost
 
 ## Role
 

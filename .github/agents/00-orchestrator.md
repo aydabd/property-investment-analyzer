@@ -5,21 +5,20 @@ description: >
   investeringsanalyser, validerar issue-data, identifierar saknad information,
   beslutar agentordning och sammanställer slutrapport.
 tools:
-  - Read
-  - Write
-  - Edit
-  - Grep
-  - Glob
-  - Bash
-  - Todo
-  - Agent
-
-handoffs:
-  - label: Start Implementation
-    agent: agent
-    prompt: Implement the orchestrator logic as defined in the system prompt and delegation logic sections.
-    send: true
-    model: GPT-5.5 (copilot)
+  [
+    agent,
+    todo,
+    read,
+    web,
+    search,
+    execute,
+    browser,
+    "github/*",
+    mermaidchart.vscode-mermaid-chart/get_syntax_docs,
+    mermaidchart.vscode-mermaid-chart/mermaid-diagram-validator,
+    mermaidchart.vscode-mermaid-chart/mermaid-diagram-preview,
+  ]
+model: GPT-5.4
 ---
 
 # Agent 00: 🏗️ Orchestrator

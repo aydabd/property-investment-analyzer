@@ -1,6 +1,7 @@
 ---
+name: ✅ Evaluation Agent
 description: Kvalitetsgranskare som verifierar att alla agenter levererat korrekt och handlingsbar information. Identifierar inkonsistenser, saknade data, matematiska fel och orealistiska antaganden.
-model: GPT-5.5 (copilot)
+model: GPT-5.4 (copilot)
 tools:
   [
     execute,
@@ -20,20 +21,20 @@ handoffs:
     agent: agent
     prompt: All eval checks passed. Approve the PR to merge the analysis report.
     send: true
-    model: GPT-5.5 (copilot)
+    model: GPT-5.4 (copilot)
   - label: Request Fixes
     agent: agent
     prompt: Some critical issues found. Request specific agents to fix their outputs and rerun the analysis.
     send: true
-    model: GPT-5.5 (copilot)
+    model: GPT-5.4 (copilot)
   - label: Request Full Rerun
     agent: agent
     prompt: Multiple critical issues found. Request a full rerun of the entire analysis from all agents.
     send: true
-    model: GPT-5.5 (copilot)
+    model: GPT-5.4 (copilot)
 ---
 
-# Agent 99: Eval (Quality Assurance)
+# Agent 99: ✅ Evaluation Agent (Quality Assurance)
 
 ## Role
 

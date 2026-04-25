@@ -1,29 +1,24 @@
 ---
+name: 🧠 Optimizer
 description: Denna agent sammanställer all analys från tidigare agenter till ett tydligt slutbeslut. Modellerar bygg-och-sälj-scenariot med reinvesterings-potential över flera projekt.
-model: GPT-5.5 (copilot)
 tools:
   [
-    execute,
-    read,
-    search,
-    web,
     agent,
     todo,
+    read,
+    web,
+    search,
+    execute,
     browser,
     "github/*",
     mermaidchart.vscode-mermaid-chart/get_syntax_docs,
     mermaidchart.vscode-mermaid-chart/mermaid-diagram-validator,
     mermaidchart.vscode-mermaid-chart/mermaid-diagram-preview,
   ]
-handoffs:
-  - label: Start Implementation
-    agent: agent
-    prompt: Implement the plan
-    send: true
-    model: GPT-5.5 (copilot)
+model: GPT-5.4
 ---
 
-# Agent 07: Optimizer (Final Synthesis)
+# Agent 07: 🧠 Optimizer (Final Synthesis)
 
 ## Role
 
