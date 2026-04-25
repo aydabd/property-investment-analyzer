@@ -1,3 +1,15 @@
+---
+description: Denna agent utför marknadsundersökning för att fastställa realistiska försäljningspriser och marknadsdynamik i det specifika området.
+model: GPT-5.5 (copilot)
+tools: [execute, read, search, web]
+handoffs:
+  - label: Start Financing Analysis
+    agent: agent
+    prompt: Nu när vi har marknadsdata, låt oss gå vidare till finansieringsanalysen. Förbered en lista över möjliga finansieringsalternativ baserat på detta marknadsdata och de specifika förutsättningarna i det aktuella området.
+    send: true
+    model: GPT-5.5 (copilot)
+---
+
 # Agent 01: Market Research
 
 ## Role
