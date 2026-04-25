@@ -1,3 +1,27 @@
+---
+name: investment-orchestrator
+description: >
+  Koordinerar AI-agenter för husbyggnadsinvesteringar. Körs först vid nya
+  investeringsanalyser, validerar issue-data, identifierar saknad information,
+  beslutar agentordning och sammanställer slutrapport.
+tools:
+  - Read
+  - Write
+  - Edit
+  - Grep
+  - Glob
+  - Bash
+  - Todo
+  - Agent
+
+handoffs:
+  - label: Start Implementation
+    agent: agent
+    prompt: Implement the orchestrator logic as defined in the system prompt and delegation logic sections.
+    send: true
+    model: GPT-5.5 (copilot)
+---
+
 # Agent 00: Orchestrator
 
 ## Role
