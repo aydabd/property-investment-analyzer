@@ -198,11 +198,6 @@ Räntekostnad byggtid: X kr
 TOTAL: X kr
 ```
 
-### Kapitalstruktur
-
-- EK (20%): X kr
-- Byggkreditiv (80%): X kr
-
 ### Skatt vid Försäljning
 
 | Struktur                | Bruttovinst | Skatt          | Netto |
