@@ -156,7 +156,7 @@ def stub_agent_file(tmp_workspace: Path) -> Path:
 def issue_data_minimal() -> dict[str, Any]:
     """Minimal valid issue data passing validation."""
     return {
-        "kommun": "TestKommun",
+        "kommun": "Lund",
         "område": "TestOmråde",
         "tomtpris": "1000000",
         "tomtstorlek": "500",

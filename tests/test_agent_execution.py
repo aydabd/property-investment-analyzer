@@ -75,7 +75,7 @@ class TestBuildAgentContext:
             previous_outputs={},
             settings=settings,
         )
-        assert "TestKommun" in context
+        assert "Lund" in context
         assert "## Issue Data" in context
 
     def test_context_includes_previous_outputs(

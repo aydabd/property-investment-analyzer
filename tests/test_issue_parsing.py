@@ -7,6 +7,7 @@ from typing import Any
 import pytest
 
 from property_investment_planner.run_analysis import (
+    collect_orchestrator_questions,
     detect_agent_questions,
     parse_issue_body,
     validate_issue_data,
@@ -88,6 +89,13 @@ class TestValidateIssueData:
         assert is_valid is False
         assert "kommun" in missing
 
+    def test_none_kommun_reports_missing_only(self, issue_data_minimal: dict[str, Any]) -> None:
+        issue_data_minimal["kommun"] = None
+        is_valid, problems = validate_issue_data(issue_data_minimal)
+        assert is_valid is False
+        assert "kommun" in problems
+        assert not any(problem.startswith("kommun:") for problem in problems)
+
     def test_multiple_missing_reported(self) -> None:
         is_valid, missing = validate_issue_data({})
         assert is_valid is False
@@ -98,6 +106,72 @@ class TestValidateIssueData:
         is_valid, missing = validate_issue_data(issue_data_minimal)
         assert is_valid is False
         assert "kommun" in missing
+
+    def test_unrecognized_kommun_fails(self, issue_data_minimal: dict[str, Any]) -> None:
+        issue_data_minimal["kommun"] = "TestKommun"
+        is_valid, problems = validate_issue_data(issue_data_minimal)
+        assert is_valid is False
+        assert any(problem.startswith("kommun:") for problem in problems)
+
+    def test_kommun_validation_is_case_insensitive(
+        self, issue_data_minimal: dict[str, Any]
+    ) -> None:
+        issue_data_minimal["kommun"] = "lund"
+        is_valid, problems = validate_issue_data(issue_data_minimal)
+        assert is_valid is True
+        assert problems == []
+
+    def test_low_tomtpris_fails(self, issue_data_minimal: dict[str, Any]) -> None:
+        issue_data_minimal["tomtpris"] = "100000"
+        is_valid, problems = validate_issue_data(issue_data_minimal)
+        assert is_valid is False
+        assert "tomtpris" in " ".join(problems)
+
+    def test_invalid_tomtpris_format_fails(self, issue_data_minimal: dict[str, Any]) -> None:
+        issue_data_minimal["tomtpris"] = "1000000 kr"
+        is_valid, problems = validate_issue_data(issue_data_minimal)
+        assert is_valid is False
+        assert "ogiltigt talformat" in " ".join(problems)
+
+    def test_out_of_range_tomtstorlek_fails(self, issue_data_minimal: dict[str, Any]) -> None:
+        issue_data_minimal["tomtstorlek"] = "90"
+        is_valid, problems = validate_issue_data(issue_data_minimal)
+        assert is_valid is False
+        assert "tomtstorlek" in " ".join(problems)
+
+    def test_invalid_tomtstorlek_format_fails(self, issue_data_minimal: dict[str, Any]) -> None:
+        issue_data_minimal["tomtstorlek"] = "500 kvm"
+        is_valid, problems = validate_issue_data(issue_data_minimal)
+        assert is_valid is False
+        assert "ogiltigt talformat" in " ".join(problems)
+
+    def test_inconsistent_partnership_details_fails(
+        self, issue_data_minimal: dict[str, Any]
+    ) -> None:
+        issue_data_minimal["partnerskap"] = (
+            "Ja – investerare + byggherre (ingen bygger, en sköter bygget)"
+        )
+        issue_data_minimal["partner_detaljer"] = "En partner som köper och bygger själv"
+        is_valid, problems = validate_issue_data(issue_data_minimal)
+        assert is_valid is False
+        assert "partnerskap" in " ".join(problems)
+
+
+class TestCollectOrchestratorQuestions:
+    """Tests for collect_orchestrator_questions()."""
+
+    def test_missing_detaljplan_creates_question(self, issue_data_minimal: dict[str, Any]) -> None:
+        questions = collect_orchestrator_questions(issue_data_minimal)
+        assert any("Detaljplan-nummer" in question for question in questions)
+
+    def test_no_questions_when_required_context_exists(
+        self,
+        issue_data_minimal: dict[str, Any],
+    ) -> None:
+        issue_data_minimal["detaljplan_info"] = "1281K-P149"
+        issue_data_minimal["deadline"] = "2026-06-20"
+        questions = collect_orchestrator_questions(issue_data_minimal)
+        assert questions == []
 
 
 class TestDetectAgentQuestions:

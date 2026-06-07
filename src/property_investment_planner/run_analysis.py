@@ -30,6 +30,7 @@ from property_investment_planner.constants import (
     DEFAULT_ASSUMPTIONS,
     ISSUE_FIELD_MAPPING,
     REQUIRED_ISSUE_FIELDS,
+    SWEDISH_MUNICIPALITIES_CASEFOLDED,
     Settings,
     load_settings,
 )
@@ -72,13 +73,91 @@ def parse_issue_body(body: str) -> dict[str, Any]:
 
 
 def validate_issue_data(data: dict[str, Any]) -> tuple[bool, list[str]]:
-    """Check that required fields are present.
+    """Check that required and critical validation checks pass.
 
     Returns:
-        (is_valid, missing_fields)
+        (is_valid, missing_or_invalid_fields)
     """
-    missing = [f for f in REQUIRED_ISSUE_FIELDS if f not in data or not data[f]]
-    return len(missing) == 0, missing
+    problems = [f for f in REQUIRED_ISSUE_FIELDS if f not in data or not data[f]]
+
+    kommun_raw = data.get("kommun")
+    kommun = str(kommun_raw).strip() if kommun_raw is not None else ""
+    if (
+        "kommun" not in problems
+        and kommun
+        and kommun.casefold() not in SWEDISH_MUNICIPALITIES_CASEFOLDED
+    ):
+        problems.append(f"kommun: '{kommun}' matchar inte en känd svensk kommun.")
+
+    tomtpris = _parse_int(data.get("tomtpris"))
+    if data.get("tomtpris") and tomtpris is None:
+        problems.append("tomtpris: ogiltigt talformat, använd endast siffror.")
+    elif tomtpris is not None and tomtpris <= 100_000:
+        problems.append("tomtpris: ange ett rimligt värde över 100 000 kr.")
+
+    tomtstorlek = _parse_int(data.get("tomtstorlek"))
+    if data.get("tomtstorlek") and tomtstorlek is None:
+        problems.append("tomtstorlek: ogiltigt talformat, använd endast siffror.")
+    elif tomtstorlek is not None and not 100 <= tomtstorlek <= 5000:
+        problems.append("tomtstorlek: ange ett rimligt värde mellan 100 och 5000 kvm.")
+
+    partnerskap = str(data.get("partnerskap", "")).strip().lower()
+    partner_detaljer = str(data.get("partner_detaljer", "")).strip().lower()
+    if partnerskap.startswith("ja") and "investerare + byggherre" in partnerskap:
+        mentions_investor = "invester" in partner_detaljer
+        mentions_builder = "byggherre" in partner_detaljer or "bygg" in partner_detaljer
+        if not partner_detaljer or "en partner" in partner_detaljer:
+            problems.append(
+                "partnerskap: detaljerna är otydliga för upplägget investerare + byggherre."
+            )
+        elif not (mentions_investor and mentions_builder):
+            problems.append("partnerskap: beskriv tydligt både investerarens och byggherrens roll.")
+
+    return len(problems) == 0, problems
+
+
+def _parse_int(value: Any) -> int | None:
+    """Parse integer-like values from issue fields."""
+    if value is None:
+        return None
+    text = str(value).strip().replace(" ", "")
+    if not text:
+        return None
+    if not re.fullmatch(r"\d+", text):
+        return None
+    return int(text)
+
+
+def collect_orchestrator_questions(data: dict[str, Any]) -> list[str]:
+    """Collect critical follow-up questions before full analysis can proceed."""
+    questions: list[str] = []
+
+    if not data.get("detaljplan_info"):
+        questions.append("**Detaljplan-nummer** (t.ex. `1281K-P149`) – behövs för tomtanalysen")
+
+    if not data.get("deadline"):
+        questions.append("**Deadline för tomt-beslut** – påverkar tidsplaneringen")
+
+    return questions
+
+
+def comment_orchestrator_questions(issue: Any, questions: list[str]) -> None:
+    """Post orchestrator follow-up questions in standardized format."""
+    lines = [
+        "## Orchestrator: behöver mer information",
+        "",
+        "Innan jag kan starta analysen behöver jag veta följande:",
+        "",
+    ]
+    lines.extend(f"{index}. {question}" for index, question in enumerate(questions, start=1))
+    lines.extend(
+        [
+            "",
+            "Svara genom att redigera issue eller kommentera nedan.",
+            "När jag har informationen startar jag agenterna automatiskt.",
+        ]
+    )
+    issue.create_comment("\n".join(lines))
 
 
 def load_agent_prompt(agent_name: str, settings: Settings) -> str:
@@ -372,11 +451,12 @@ def main(issue_number: int, repo: str, agents: str) -> None:
     # Validate
     is_valid, missing = validate_issue_data(issue_data)
     if not is_valid:
-        msg = (
-            f"❌ Issue saknar obligatoriska fält: {', '.join(missing)}."
-            " Redigera issue och kommentera `/rerun all`."
-        )
-        issue.create_comment(msg)
+        comment_orchestrator_questions(issue, missing)
+        sys.exit(1)
+
+    blocking_questions = collect_orchestrator_questions(issue_data)
+    if blocking_questions:
+        comment_orchestrator_questions(issue, blocking_questions)
         sys.exit(1)
 
     # Decide which agents to run
